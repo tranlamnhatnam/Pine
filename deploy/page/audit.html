@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đánh giá sắp xếp - Pine</title>
+    <link rel="stylesheet" href="/css/modern.css">
+    <style>
+        .audit-hero {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        .audit-hero-top {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .audit-hero-body {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 24px;
+            align-items: center;
+        }
+
+        @media (max-width: 680px) {
+            .audit-hero-body {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .audit-score-card {
+                margin: 0 auto;
+            }
+        }
+
+        .audit-score-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            background-color: var(--bg-page);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .audit-circle-gauge {
+            width: 84px;
+            height: 84px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 5px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .audit-circle-gauge.excellent {
+            border-color: #188038;
+            background: rgba(24, 128, 56, 0.05);
+        }
+
+        .audit-circle-gauge.warning {
+            border-color: #f59e0b;
+            background: rgba(245, 158, 11, 0.05);
+        }
+
+        .audit-circle-gauge.critical {
+            border-color: #d93025;
+            background: rgba(217, 48, 37, 0.05);
+        }
+
+        .audit-circle-num {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        .audit-circle-sub {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-top: 3px;
+        }
+
+        .audit-status-pill {
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 12px;
+            margin-top: 8px;
+            display: inline-block;
+        }
+
+        .audit-status-pill.excellent {
+            background-color: #e6f4ea;
+            color: #137333;
+        }
+
+        .audit-status-pill.warning {
+            background-color: #fef3c7;
+            color: #b45309;
+        }
+
+        .audit-status-pill.critical {
+            background-color: #fce8e6;
+            color: #c5221f;
+        }
+
+        body.dark .audit-status-pill.excellent { background-color: #143522; color: #81c995; }
+        body.dark .audit-status-pill.warning { background-color: #3b2a0c; color: #fde68a; }
+        body.dark .audit-status-pill.critical { background-color: #3c2424; color: #f28b82; }
+
+        .audit-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 520px) {
+            .audit-stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .audit-stat-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background-color: var(--bg-page);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        .audit-stat-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .audit-stat-val {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .audit-progress-box {
+            margin-top: 14px;
+        }
+
+        .audit-progress-track {
+            width: 100%;
+            height: 8px;
+            background-color: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .audit-progress-bar {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.4s ease;
+        }
+
+        .audit-progress-bar.excellent { background-color: #188038; }
+        .audit-progress-bar.warning { background-color: #f59e0b; }
+        .audit-progress-bar.critical { background-color: #d93025; }
+    </style>
+</head>
+<body class="light">
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div>
+                <div class="sidebar-brand">
+                    <div class="sidebar-logo">
+                        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="4" y="6" width="18" height="4" rx="2" fill="#F43F5E"/>
+                            <rect x="4" y="14" width="24" height="4" rx="2" fill="#F59E0B"/>
+                            <rect x="4" y="22" width="14" height="4" rx="2" fill="#3B82F6"/>
+                            <circle cx="23" cy="24" r="2.5" fill="#3B82F6"/>
+                        </svg>
+                    </div>
+                    <span class="sidebar-title">Pine</span>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <a class="nav-item" data-page="options" href="/page/options.html">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        <span>Cơ bản</span>
+                    </a>
+                    <a class="nav-item" data-page="rules" href="/page/rules.html">
+                        <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+                        <span>Kiểu thư mục</span>
+                    </a>
+                    <a class="nav-item active" data-page="audit" href="/page/audit.html">
+                        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+                        <span>Đánh giá sắp xếp</span>
+                    </a>
+                    <a class="nav-item" data-page="stats" href="/page/stats.html">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                        <span>Thống kê</span>
+                    </a>
+                    <a class="nav-item" data-page="history" href="/page/history.html">
+                        <svg viewBox="0 0 24 24"><path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21a9 9 0 0 0 0-18zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
+                        <span>Lịch sử phiên bản</span>
+                    </a>
+
+                    <!-- Nhóm 1: Dọn dẹp rác -->
+                    <div class="nav-group" id="nav-group-cleanup">
+                        <a class="nav-item nav-parent" data-page="cleanup" href="/page/tools-empty.html">
+                            <svg viewBox="0 0 24 24"><path d="M15 16h4v2h-4zm0-8h7v2h-7zm0 4h6v2h-6zM3 18c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V8H3v10zM14 5h-3l-1-1H6L5 5H2v2h12z"/></svg>
+                            <span>Dọn dẹp rác</span>
+                            <svg class="chevron-icon" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                        </a>
+                        <div class="nav-submenu">
+                            <a class="nav-subitem" data-page="tools-empty" href="/page/tools-empty.html">
+                                <span class="subitem-dot"></span>
+                                <span>Thư mục rỗng</span>
+                            </a>
+                            <a class="nav-subitem" data-page="tools-duplicates" href="/page/tools-duplicates.html">
+                                <span class="subitem-dot"></span>
+                                <span>Dấu trang trùng lặp</span>
+                            </a>
+                            <a class="nav-subitem" data-page="tools-similar" href="/page/tools-similar.html">
+                                <span class="subitem-dot"></span>
+                                <span>Dấu trang tương tự</span>
+                            </a>
+                            <a class="nav-subitem" data-page="tools-broken" href="/page/tools-broken.html">
+                                <span class="subitem-dot"></span>
+                                <span>Liên kết hỏng (404)</span>
+                            </a>
+                            <a class="nav-subitem" data-page="tools-dormant" href="/page/tools-dormant.html">
+                                <span class="subitem-dot"></span>
+                                <span>Dấu trang ngủ đông</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Nhóm 2: Tiện ích xử lý -->
+                    <div class="nav-group" id="nav-group-utilities">
+                        <a class="nav-item nav-parent" data-page="utilities" href="/page/tools-replace.html">
+                            <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+                            <span>Tiện ích xử lý</span>
+                            <svg class="chevron-icon" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                        </a>
+                        <div class="nav-submenu">
+                            <a class="nav-subitem" data-page="tools-replace" href="/page/tools-replace.html">
+                                <span class="subitem-dot"></span>
+                                <span>Thay thế URL</span>
+                            </a>
+                            <a class="nav-subitem" data-page="tools-favicons" href="/page/tools-favicons.html">
+                                <span class="subitem-dot"></span>
+                                <span>Làm mới Favicon</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <a class="nav-item" data-page="sync" href="/page/sync.html">
+                        <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0 0 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74A7.93 7.93 0 0 0 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+                        <span>Đồng bộ</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-version" id="app-version">v2026.11.1</div>
+                <div class="sidebar-links">
+                    <a href="https://github.com" target="_blank" rel="noopener">Trợ giúp</a>
+                    <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+                    <a href="#" id="link-support">Ủng hộ</a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Panel -->
+        <main class="main-wrapper">
+            <!-- Page Header -->
+            <div class="page-header" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 24px;">
+                <div style="flex: 1; min-width: 280px;">
+                    <h1 class="page-title" style="margin: 0 0 6px 0;">Đánh giá & Kiểm định Sắp xếp</h1>
+                    <div class="page-subtitle" style="margin: 0;">Đo lường mức độ tuân thủ quy tắc sắp xếp và tối ưu trật tự bộ sưu tập dấu trang.</div>
+                </div>
+                <div style="display: flex; gap: 10px; align-items: center; flex-shrink: 0;">
+                    <button type="button" class="btn btn-secondary" id="btn-refresh-audit">
+                        <span data-icon="refresh" data-size="14"></span>
+                        <span>Quét lại</span>
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sort-now" id="btn-sort-now-audit">
+                        <span data-icon="sort" data-size="14"></span>
+                        <span>Sắp xếp toàn bộ</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hero Compliance & Health Card -->
+            <div class="audit-hero" id="audit-hero-card">
+                <div class="audit-hero-top">
+                    <div class="audit-icon excellent" id="audit-main-icon">
+                        <span data-icon="audit" data-size="24"></span>
+                    </div>
+                    <div>
+                        <h2 class="audit-title" id="audit-title-text" style="font-size: 18px; margin: 0 0 4px 0;">Đang đánh giá hệ thống...</h2>
+                        <p class="audit-desc" id="audit-summary-desc" style="font-size: 13.5px; margin: 0;">Hệ thống đang đối chiếu vị trí từng dấu trang theo cấu hình quy tắc của bạn.</p>
+                    </div>
+                </div>
+
+                <div class="audit-hero-body">
+                    <div class="audit-score-card">
+                        <div class="audit-circle-gauge excellent" id="audit-score-circle">
+                            <span class="audit-circle-num" id="audit-score-val"><span class="skeleton skeleton-text lg" style="width: 40px; margin: 0;"></span></span>
+                            <span class="audit-circle-sub">Đã sắp xếp</span>
+                        </div>
+                        <div class="audit-status-pill excellent" id="audit-status-badge">Đang quét...</div>
+                    </div>
+
+                    <div>
+                        <div class="audit-stats-grid">
+                            <div class="audit-stat-item">
+                                <div class="audit-stat-label">
+                                    <span class="audit-dot green"></span>
+                                    <span>Thư mục chuẩn</span>
+                                </div>
+                                <span class="audit-stat-val" id="audit-stat-sorted-folders"><span class="skeleton skeleton-text" style="width: 50px;"></span></span>
+                            </div>
+                            <div class="audit-stat-item">
+                                <div class="audit-stat-label">
+                                    <span class="audit-dot yellow"></span>
+                                    <span>Thư mục chưa xếp</span>
+                                </div>
+                                <span class="audit-stat-val" id="audit-stat-unsorted-folders"><span class="skeleton skeleton-text" style="width: 40px;"></span></span>
+                            </div>
+                            <div class="audit-stat-item">
+                                <div class="audit-stat-label">
+                                    <span class="audit-dot blue"></span>
+                                    <span>Dấu trang lệch vị trí</span>
+                                </div>
+                                <span class="audit-stat-val" id="audit-stat-misplaced-items"><span class="skeleton skeleton-text" style="width: 45px;"></span></span>
+                            </div>
+                            <div class="audit-stat-item">
+                                <div class="audit-stat-label">
+                                    <span class="audit-dot purple"></span>
+                                    <span>Điểm ngăn nắp</span>
+                                </div>
+                                <span class="audit-stat-val" id="audit-stat-health"><span class="skeleton skeleton-text" style="width: 50px;"></span></span>
+                            </div>
+                        </div>
+
+                        <div class="audit-progress-box">
+                            <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-secondary); margin-bottom: 6px;">
+                                <span>Mức độ tuân thủ quy tắc</span>
+                                <strong id="audit-progress-text" style="color: var(--text-primary);">0%</strong>
+                            </div>
+                            <div class="audit-progress-track">
+                                <div class="audit-progress-bar excellent" id="audit-progress-fill" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unsorted Folders Card (Shown ONLY when unsortedFoldersCount > 0) -->
+            <div class="card audit-unsorted-card" id="card-unsorted-folders" style="display: none; padding: 0; overflow: hidden; margin-bottom: 24px;">
+                <div class="audit-unsorted-header">
+                    <div class="audit-unsorted-title-group">
+                        <div class="audit-unsorted-icon">
+                            <span data-icon="folder" data-size="18"></span>
+                        </div>
+                        <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: var(--text-primary);">Chi tiết các thư mục chưa được sắp xếp</h3>
+                        <span class="badge badge-warning" id="audit-unsorted-badge">0 thư mục</span>
+                    </div>
+                    <div class="search-input-wrapper" style="width: 250px;">
+                        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                        <input type="text" class="search-input" id="input-filter-unsorted" placeholder="Lọc theo tên thư mục...">
+                    </div>
+                </div>
+
+                <div class="audit-unsorted-list" id="audit-unsorted-list"></div>
+            </div>
+
+            <!-- Helpful Guidance Cards -->
+            <div class="section-title" style="margin-top: 8px; margin-bottom: 14px; font-size: 14px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Hướng dẫn duy trì trật tự</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                <div class="card" style="padding: 16px; display: flex; gap: 14px; align-items: flex-start;">
+                    <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(26, 115, 232, 0.1); color: var(--primary-blue); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <span data-icon="sort" data-size="20"></span>
+                    </div>
+                    <div>
+                        <div style="font-weight: 700; font-size: 13.5px; color: var(--text-primary); margin-bottom: 4px;">Sắp xếp tự động thời gian thực</div>
+                        <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">Bật tính năng "Tự động sắp xếp" trong phần Cơ bản để Pine duy trì trật tự mọi lúc khi bạn thêm hoặc sửa dấu trang.</div>
+                    </div>
+                </div>
+
+                <div class="card" style="padding: 16px; display: flex; gap: 14px; align-items: flex-start;">
+                    <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(245, 158, 11, 0.1); color: #f59e0b; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <span data-icon="rules" data-size="20"></span>
+                    </div>
+                    <div>
+                        <div style="font-weight: 700; font-size: 13.5px; color: var(--text-primary); margin-bottom: 4px;">Tùy biến quy tắc từng thư mục</div>
+                        <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">Bạn có thể gán quy tắc riêng cho từng thư mục (theo ngày lưu mới nhất, tên A-Z hoặc domain) tại trang Kiểu thư mục.</div>
+                    </div>
+                </div>
+
+                <div class="card" style="padding: 16px; display: flex; gap: 14px; align-items: flex-start;">
+                    <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(24, 128, 56, 0.1); color: #188038; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <span data-icon="sync" data-size="20"></span>
+                    </div>
+                    <div>
+                        <div style="font-weight: 700; font-size: 13.5px; color: var(--text-primary); margin-bottom: 4px;">Điểm khôi phục an toàn</div>
+                        <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">Trước khi thực hiện các đợt sắp xếp hoặc dọn dẹp quy mô lớn, Pine luôn tự động tạo điểm khôi phục an toàn.</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/browser-polyfill.js"></script>
+    <script src="/js/shared.js"></script>
+    <script src="/js/page/pine-core.js"></script>
+    <script src="/js/page/page-audit.js"></script>
+</body>
+</html>

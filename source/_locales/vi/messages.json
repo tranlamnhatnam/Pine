@@ -1,0 +1,10 @@
+{
+    "extensionDescription": {
+        "message": "Tự động sắp xếp dấu trang theo tiêu đề, ngày thêm hoặc URL.",
+        "description": "Mô tả tính năng của tiện ích."
+    },
+    "extensionName": {
+        "message": "Pine",
+        "description": "Tên tiện ích."
+    }
+}

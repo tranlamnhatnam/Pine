@@ -1,0 +1,284 @@
+﻿<!doctype html>
+<html lang="vi" class="light" id="html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cơ bản - Pine</title>
+    <link rel="stylesheet" href="/css/modern.css?version=2026.11.1.0">
+    <link rel="icon" href="/images/icon/icon-default-32.png" type="image/png">
+</head>
+<body class="light">
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div>
+                <div class="sidebar-brand">
+                    <div class="sidebar-logo">
+                        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="4" y="6" width="18" height="4" rx="2" fill="#F43F5E"/>
+                            <rect x="4" y="14" width="24" height="4" rx="2" fill="#F59E0B"/>
+                            <rect x="4" y="22" width="14" height="4" rx="2" fill="#3B82F6"/>
+                            <circle cx="23" cy="24" r="2.5" fill="#3B82F6"/>
+                        </svg>
+                    </div>
+                    <span class="sidebar-title">Pine</span>
+                </div>
+
+                                                <nav class="sidebar-nav">
+                    <a class="nav-item" data-page="options" href="/page/options.html">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        <span>Cơ bản</span>
+                    </a>
+                    <a class="nav-item" data-page="rules" href="/page/rules.html">
+                        <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+                        <span>Kiểu thư mục</span>
+                    </a>
+                    <a class="nav-item" data-page="audit" href="/page/audit.html">
+                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+                    <span>Đánh giá sắp xếp</span>
+                </a>
+                <a class="nav-item" data-page="stats" href="/page/stats.html">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                        <span>Thống kê</span>
+                    </a>
+                    <a class="nav-item" data-page="history" href="/page/history.html">
+                        <svg viewBox="0 0 24 24"><path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21a9 9 0 0 0 0-18zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
+                        <span>Lịch sử phiên bản</span>
+                    </a>
+
+                    <!-- Nhóm 1: Dọn dẹp rác -->
+                    <div class="nav-group" id="nav-group-cleanup">
+                        <a class="nav-item nav-parent" data-page="cleanup" href="/page/tools-empty.html">
+                            <svg viewBox="0 0 24 24"><path d="M15 16h4v2h-4zm0-8h7v2h-7zm0 4h6v2h-6zM3 18c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V8H3v10zM14 5h-3l-1-1H6L5 5H2v2h12z"/></svg>
+                            <span>Dọn dẹp rác</span>
+                            <svg class="chevron-icon" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                        </a>
+                        <div class="nav-submenu">
+                            <a class="nav-subitem" data-page="tools-empty" href="/page/tools-empty.html">
+                                <span class="subitem-dot"></span>
+                                <span>Thư mục rỗng</span>
+                            </a>
+                            <a class="nav-subitem" data-page="tools-duplicates" href="/page/tools-duplicates.html">
+                                <span class="subitem-dot"></span>
+                                <span>Dấu trang trùng lặp</span>
+                            </a>
+                            <a class="nav-subitem" data-page="tools-similar" href="/page/tools-similar.html">
+                                <span class="subitem-dot"></span>
+                                <span>Dấu trang tương tự</span>
+                            </a>
+                            <a class="nav-subitem" data-page="tools-broken" href="/page/tools-broken.html">
+                                <span class="subitem-dot"></span>
+                                <span>Liên kết hỏng (404)</span>
+                            </a>
+                            <a class="nav-subitem" data-page="tools-dormant" href="/page/tools-dormant.html">
+                                <span class="subitem-dot"></span>
+                                <span>Dấu trang ngủ đông</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Nhóm 2: Tiện ích xử lý -->
+                    <div class="nav-group" id="nav-group-utilities">
+                        <a class="nav-item nav-parent" data-page="utilities" href="/page/tools-replace.html">
+                            <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+                            <span>Tiện ích xử lý</span>
+                            <svg class="chevron-icon" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                        </a>
+                        <div class="nav-submenu">
+                            <a class="nav-subitem" data-page="tools-replace" href="/page/tools-replace.html">
+                                <span class="subitem-dot"></span>
+                                <span>Thay thế URL</span>
+                            </a>
+                            <a class="nav-subitem" data-page="tools-favicons" href="/page/tools-favicons.html">
+                                <span class="subitem-dot"></span>
+                                <span>Làm mới Favicon</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <a class="nav-item" data-page="sync" href="/page/sync.html">
+                        <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0 0 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74A7.93 7.93 0 0 0 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+                        <span>Đồng bộ</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-version" id="app-version">v2026.11.1</div>
+                <div class="sidebar-links">
+                    <a href="https://github.com" target="_blank" rel="noopener">Trợ giúp</a>
+                    <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+                    <a href="#" id="link-support">Ủng hộ</a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Panel -->
+        <main class="main-wrapper">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Cơ bản</h1>
+                </div>
+            </div>
+
+            <!-- Stats Overview Dashboard Widget -->
+            <div class="stats-overview-card">
+                <div class="stat-box">
+                    <div class="stat-icon" style="background: rgba(26, 115, 232, 0.1); color: var(--primary-blue);">
+                        <svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-label">Tổng dấu trang</div>
+                        <div class="stat-value" id="stat-total-bookmarks">...</div>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+                        <svg viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-label">Thư mục</div>
+                        <div class="stat-value" id="stat-total-folders">...</div>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon" style="background: rgba(24, 128, 56, 0.1); color: #188038;">
+                        <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0 0 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74A7.93 7.93 0 0 0 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-label">Lần sắp xếp gần nhất</div>
+                        <div class="stat-value" id="stat-last-sorted" style="font-size: 14px;">Chưa ghi nhận</div>
+                    </div>
+                </div>
+                <div class="stat-box stat-action-box">
+                    <button type="button" class="btn btn-primary btn-sort-now" id="btn-dashboard-sort" style="width: 100%; justify-content: center;">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0 0 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74A7.93 7.93 0 0 0 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+                        <span>Sắp xếp ngay</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <!-- Giao diện -->
+                <div class="card-row">
+                    <div class="row-info">
+                        <div class="row-title">Giao diện</div>
+                        <div class="row-desc">Áp dụng cho cửa sổ bật lên, trình chỉnh sửa và trang này.</div>
+                    </div>
+                    <div class="row-action">
+                        <div class="segmented-control" id="seg-theme">
+                            <button type="button" class="segmented-btn" data-value="automatic">
+                                <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+                                <span>Theo hệ thống</span>
+                            </button>
+                            <button type="button" class="segmented-btn" data-value="light">
+                                <svg viewBox="0 0 24 24"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/></svg>
+                                <span>Sáng</span>
+                            </button>
+                            <button type="button" class="segmented-btn" data-value="dark">
+                                <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
+                                <span>Tối</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tự động sắp xếp -->
+                <div class="card-row">
+                    <div class="row-info">
+                        <div class="row-title">Tự động sắp xếp</div>
+                        <div class="row-desc">Tự động sắp xếp các dấu trang ngay khi có thay đổi (thêm, sửa, di chuyển) theo quy tắc đã bật.</div>
+                    </div>
+                    <div class="row-action">
+                        <label class="switch">
+                            <input type="checkbox" id="opt-automatic-sorting">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Thư mục lên đầu -->
+                <div class="card-row">
+                    <div class="row-info">
+                        <div class="row-title">Thư mục lên đầu (Folders First)</div>
+                        <div class="row-desc">Nếu bật, các thư mục con sẽ luôn được liệt kê theo thứ tự (A-Z) và hiển thị trước các liên kết trang web.</div>
+                    </div>
+                    <div class="row-action">
+                        <label class="switch">
+                            <input type="checkbox" id="opt-group-folders">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Màu biểu tượng -->
+                <div class="card-row">
+                    <div class="row-info">
+                        <div class="row-title">Màu biểu tượng</div>
+                        <div class="row-desc">Màu biểu tượng Pine hiển thị trên thanh công cụ và tab trình duyệt.</div>
+                    </div>
+                    <div class="row-action">
+                        <div class="segmented-control" id="seg-icon-color">
+                            <button type="button" class="segmented-btn" data-value="automatic">
+                                <span class="color-dot" style="width: 10px; height: 10px; border-radius: 50%; background: linear-gradient(135deg, #3B82F6, #10B981); display: inline-block;"></span>
+                                <span>Tự động</span>
+                            </button>
+                            <button type="button" class="segmented-btn" data-value="light">
+                                <span class="color-dot" style="width: 10px; height: 10px; border-radius: 50%; background: #ffffff; border: 1px solid #9ca3af; display: inline-block;"></span>
+                                <span>Sáng</span>
+                            </button>
+                            <button type="button" class="segmented-btn" data-value="dark">
+                                <span class="color-dot" style="width: 10px; height: 10px; border-radius: 50%; background: #1f2937; display: inline-block;"></span>
+                                <span>Tối</span>
+                            </button>
+                            <button type="button" class="segmented-btn" data-value="green">
+                                <span class="color-dot" style="width: 10px; height: 10px; border-radius: 50%; background: #10B981; display: inline-block;"></span>
+                                <span>Xanh lá</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Phím tắt -->
+            <div class="section-title" style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Phím tắt</span>
+                <a href="chrome://extensions/shortcuts" target="_blank" style="font-size: 13px; color: var(--primary-blue); text-decoration: none; font-weight: 500;">Đổi trong cài đặt trình duyệt</a>
+            </div>
+            <div class="card">
+                <div class="card-row">
+                    <div class="row-info">
+                        <div class="row-title">Bật/tắt tự động sắp xếp</div>
+                    </div>
+                    <div class="row-action">
+                        <span class="kbd-badge">Alt + Shift + S</span>
+                    </div>
+                </div>
+                <div class="card-row">
+                    <div class="row-info">
+                        <div class="row-title">Sắp xếp ngay lập tức</div>
+                    </div>
+                    <div class="row-action">
+                        <span class="kbd-badge">Alt + Shift + R</span>
+                    </div>
+                </div>
+                <div class="card-row">
+                    <div class="row-info">
+                        <div class="row-title">Mở trình quản lý dấu trang</div>
+                    </div>
+                    <div class="row-action">
+                        <span class="kbd-badge">Ctrl + Shift + O</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/browser-polyfill.js"></script>
+    <script src="/js/shared.js"></script>
+    <script src="/js/page/pine-core.js"></script>
+    <script src="/js/page/page-options.js"></script>
+</body>
+</html>
